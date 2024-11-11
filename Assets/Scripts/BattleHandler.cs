@@ -17,6 +17,9 @@ public class BattleHandler : MonoBehaviour
 
     private CharacterBattle activeCharacterBattle;
     private State state;
+
+    public GameObject winText; // Reference to the win text UI
+    public GameObject loseText; // Reference to the lose text UI
     private enum State
     {
         WaitingForPlayer,
@@ -100,10 +103,12 @@ public class BattleHandler : MonoBehaviour
     private bool TestBattleOver() {
         if (playerCharacterBattle.isDead()) {
             Debug.Log("Enemy Wins");
+            loseText.SetActive(true); // Display the lose text
             return true;
         }
         if (enemyCharacterBattle.isDead()) {
             Debug.Log("Player Wins");
+            winText.SetActive(true); // Display the win text
             return true;
         }
         return false;
