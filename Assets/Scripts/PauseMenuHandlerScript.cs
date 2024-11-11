@@ -5,14 +5,15 @@ using UnityEngine.SceneManagement;
 
 public class PauseMenuHandlerScript : MonoBehaviour
 {
-    [SerializeField] private GameObject pauseMenuUI; // Reference to the pause menu UI
+    [SerializeField] private GameObject pausePanel; // Reference to the pause menu UI
+    [SerializeField] private GameObject guidePanel; // Reference to the settings menu UI
     public KeyCode pauseKey; // Key to pause the game
 
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (pauseMenuUI.activeSelf)
+            if (pausePanel.activeSelf)
             {
                 Resume();
             }
@@ -26,15 +27,27 @@ public class PauseMenuHandlerScript : MonoBehaviour
     // Pause the game
     public void Pause()
     {
-        pauseMenuUI.SetActive(true);
+        pausePanel.SetActive(true);
         Time.timeScale = 0f;
     }
 
     // Resume the game
     public void Resume()
     {
-        pauseMenuUI.SetActive(false);
+        pausePanel.SetActive(false);
         Time.timeScale = 1f;
+    }
+
+    // Opens the guide panel
+    public void OpenGuide()
+    {
+        guidePanel.SetActive(true);
+    }
+
+    // Closes the guide panel
+    public void CloseGuide()
+    {
+        guidePanel.SetActive(false);
     }
 
     // Change the scene based on the passed sceneID
