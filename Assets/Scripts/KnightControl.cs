@@ -49,9 +49,11 @@ public class KnightControl : MonoBehaviour
     // Spine.AnimationState and Spine.Skeleton are not Unity-serialized objects. You will not see them as fields in the inspector.
     public Spine.AnimationState spineAnimationState;
     public Spine.Skeleton skeleton;
+    AudioManager audioManager;
     // Start is called before the first frame update
-    void Awake()
+    private void Awake()
     {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
         skeletonAnimation = GetComponent<SkeletonAnimation>();
         spineAnimationState = skeletonAnimation.AnimationState;
         skeleton = skeletonAnimation.Skeleton;
@@ -93,18 +95,23 @@ public class KnightControl : MonoBehaviour
         };
     }
     public void death()
-    {
+    {   
         spineAnimationState.SetAnimation(0, deathAnimationName, false);
+        //audioManager.PlaySFX(audioManager.death);
     }
     public void stun()
     {
         spineAnimationState.SetAnimation(0, stunAnimationName, true);
     }
 
+
     public void attack_1()
     {
+        
         // Play the attack animation once
         TrackEntry trackEntry = spineAnimationState.SetAnimation(0, atkAnimationName_1, false);
+
+        audioManager.PlaySFX(audioManager.swordAttack);
 
         // Add a listener to switch back to idle when the attack animation completes
         trackEntry.Complete += entry =>
@@ -115,8 +122,10 @@ public class KnightControl : MonoBehaviour
 
     public void attack_2()
     {
+        
         // Play the attack animation once
         TrackEntry trackEntry = spineAnimationState.SetAnimation(0, atkAnimationName_2, false);
+        audioManager.PlaySFX(audioManager.shieldAttack);
 
         // Add a listener to switch back to idle when the attack animation completes
         trackEntry.Complete += entry =>
