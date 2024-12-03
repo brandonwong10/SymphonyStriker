@@ -12,7 +12,6 @@ public class CharacterBattle : MonoBehaviour
     private Vector3 slideTargetPosition;
     private Action onSlideComplete;
     private HealthSystem healthSystem;
-    // Start is called before the first frame update
     private World_Bar healthBar;
 
     private enum State
