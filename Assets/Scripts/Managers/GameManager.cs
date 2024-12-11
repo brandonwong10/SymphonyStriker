@@ -17,8 +17,6 @@ public class GameManager : MonoBehaviour
 
     public GameObject winText; // Reference to the win text UI
     public GameObject loseText; // Reference to the lose text UI
-    AudioManager audioManager;
-
     private enum State
     {
         WaitingForPlayer,
@@ -27,7 +25,6 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
         instance = this;
     }
 
@@ -115,13 +112,11 @@ public class GameManager : MonoBehaviour
 
     private bool TestBattleOver() {
         if (playerCharacterBattle.isDead()) {
-            audioManager.PlaySFX(audioManager.loser);
             Debug.Log("Enemy Wins");
             loseText.SetActive(true); // Display the lose text
             return true;
         }
         if (enemyCharacterBattle.isDead()) {
-            audioManager.PlaySFX(audioManager.winner);
             Debug.Log("Player Wins");
             winText.SetActive(true); // Display the win text
             return true;
